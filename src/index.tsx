@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
-
 import Main from './pages/Main';
 import NotFound from './pages/NotFound';
 import SearchInfo from './pages/SearchInfo';
+import { GlobalStyle } from './styles/GlobalStyle';
 
 const router = createBrowserRouter([
 	{
@@ -25,6 +25,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
 	<React.StrictMode>
+		<GlobalStyle />
 		<RouterProvider router={router} />
 	</React.StrictMode>
 );
