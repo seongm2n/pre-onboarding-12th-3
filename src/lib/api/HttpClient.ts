@@ -1,7 +1,10 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 interface HttpClientInterface {
-	fetch(endpoint: string, options?: AxiosRequestConfig): Promise<AxiosResponse>;
+	getData(
+		endpoint: string,
+		options?: AxiosRequestConfig
+	): Promise<AxiosResponse>;
 }
 
 export class HttpClient implements HttpClientInterface {
@@ -11,7 +14,7 @@ export class HttpClient implements HttpClientInterface {
 		this.#baseURL = `http://localhost:4000/`;
 	}
 
-	async fetch(
+	async getData(
 		endpoint: string,
 		options: AxiosRequestConfig = {}
 	): Promise<AxiosResponse> {
@@ -23,7 +26,7 @@ export class HttpClient implements HttpClientInterface {
 					...options.headers,
 				},
 			});
-			
+
 			// 네트워크 요청 및 응답 로깅
 			console.log('HTTP Request:', response.config);
 			console.log('HTTP Response:', response.data);
