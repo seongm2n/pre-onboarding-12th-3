@@ -4,8 +4,8 @@ import './App.css';
 const App: React.FC = () => {
 	return (
 		<>
-			<Header />
-			<Outlet />
+			{/* <Header />
+			<Outlet /> */}
 		</>
 	);
 };
