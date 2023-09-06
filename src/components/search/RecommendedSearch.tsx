@@ -1,7 +1,6 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react';
-// import { useOutsideClick } from '../../hooks/useOutsideClick';
-import styled from 'styled-components';
 import useKeyPress from '../../hooks/useKeyPress';
+import { StyledRecommendedSearch } from '../../styles/RecommendedStyle';
 
 interface RecommendationsProps {
 	recommendations: string[];
@@ -19,6 +18,7 @@ const RecommendedSearch: React.FC<RecommendationsProps> = ({
 	const upArrowPressed = useKeyPress('ArrowUp');
 	const downArrowPressed = useKeyPress('ArrowDown');
 
+	
 	const handleSelectItem = useCallback(
 		(index: number) => {
 			setSelectedItem(index);
@@ -47,10 +47,11 @@ const RecommendedSearch: React.FC<RecommendationsProps> = ({
 			);
 		}
 	}, [downArrowPressed, recommendations.length]);
-	
+
 	return (
 		<StyledRecommendedSearch>
 			<span>추천검색어</span>
+			<hr />
 			{recommendations.length > 0 ? (
 				<ul ref={listRef}>
 					{recommendations.map((recommendation, index) => (
@@ -64,36 +65,10 @@ const RecommendedSearch: React.FC<RecommendationsProps> = ({
 					))}
 				</ul>
 			) : (
-				<p>검색 결과가 없습니다.</p>
+				<p>검색어 없음</p>
 			)}
 		</StyledRecommendedSearch>
 	);
 };
 
 export default RecommendedSearch;
-
-const StyledRecommendedSearch = styled.div`
-	span {
-		font-weight: bold;
-	}
-
-	ul {
-		list-style-type: none;
-		padding: 0;
-	}
-
-	li {
-		margin: 5px 0;
-		padding: 5px;
-		cursor: pointer;
-		transition: background-color 0.2s;
-
-		&:hover {
-			background-color: gray;
-		}
-
-		&.selected {
-			background-color: lightblue; // 선택한 항목의 배경색을 원하는 색상으로 변경하세요.
-		}
-	}
-`;

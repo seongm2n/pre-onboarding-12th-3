@@ -1,4 +1,10 @@
-import { SetStateAction, useState, useEffect, useCallback } from 'react';
+import {
+	SetStateAction,
+	useState,
+	useEffect,
+	useCallback,
+	useRef,
+} from 'react';
 import {
 	SearchSickList,
 	GetSickListResponseType,
@@ -9,7 +15,10 @@ import SearchBar from './SearchBar';
 import { SearchContainer } from '../../styles/SearchInput';
 import Button from '../commons/Button';
 import RecommendedSearch from './RecommendedSearch';
-
+import styled from 'styled-components';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import { BiSearch } from 'react-icons/bi';
 const httpClient = new HttpClient();
 
 function SearchSick() {
@@ -18,6 +27,18 @@ function SearchSick() {
 	const [sickList, setSickList] = useState<GetSickListResponseType | null>(
 		null
 	);
+
+	const searchRef = useRef(null);
+	const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+	const closeSearch = () => {
+		setIsSearchOpen(false);
+	};
+
+	useOutsideClick({
+		ref: searchRef,
+		handler: closeSearch,
+	});
 
 	const filteredSickList = debouncedQuery
 		? sickList
@@ -76,13 +97,20 @@ function SearchSick() {
 				<SearchBar
 					query={query}
 					setQuery={setQuery}
-					onClick={handleClick}
+					onClick={() => setIsSearchOpen(true)}
 					handleChange={handleChange}
 				/>
+				<button
+					onClick={closeSearch}
+					style={{ outline: '0' }}
+				>
+					<AiFillCloseCircle style={{ height: '21px', width: '21px' }} />
+				</button>
+
 				<Button onClick={handleClick} />
 			</SearchContainer>
-			{isOpen ? (
-				<div style={{ backgroundColor: 'white' }}>
+			{isSearchOpen && (
+				<RecommendedContainer>
 					<RecommendedSearch
 						recommendations={
 							filteredSickList
@@ -91,10 +119,20 @@ function SearchSick() {
 						}
 						highlightText={highlightText}
 					/>
-				</div>
-			) : null}
+				</RecommendedContainer>
+			)}
 		</div>
 	);
 }
 
 export default SearchSick;
+
+const RecommendedContainer = styled.div`
+	border-radius: 15px;
+	background-color: white;
+	margin-top: 7px;
+	min-height: 40vh;
+	max-height: 50vh;
+	overflow: hidden;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;

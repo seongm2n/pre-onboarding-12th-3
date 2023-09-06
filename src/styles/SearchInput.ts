@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { BiSearch } from 'react-icons/bi';
 
 export const SearchContainer = styled.div`
 	align-items: center;
@@ -39,6 +38,9 @@ export const StyledInput = styled.input`
 	width: fit-content;
 	width: 380px;
 	padding-left: 15px;
+	&:focus::placeholder {
+		color: transparent; /* 투명하게 설정하여 placeholder를 감춥니다. */
+	}
 `;
 
 export const RecommendedContainer = styled.div`
