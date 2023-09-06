@@ -81,7 +81,12 @@ function SearchSick() {
 			<>
 				{parts.map((part, index) =>
 					part.toLowerCase() === query.toLowerCase() ? (
-						<mark key={index}>{part}</mark>
+						<strong
+							style={{ color: 'hotpink' }}
+							key={index}
+						>
+							{part}
+						</strong>
 					) : (
 						part
 					)
@@ -127,7 +132,7 @@ function SearchSick() {
 export default SearchSick;
 
 const RecommendedContainer = styled.div`
-	border-radius: 15px;
+	border-radius: 20px;
 	background-color: white;
 	margin-top: 7px;
 	min-height: 40vh;
