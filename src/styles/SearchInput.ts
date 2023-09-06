@@ -39,7 +39,7 @@ export const StyledInput = styled.input`
 	width: 380px;
 	padding-left: 15px;
 	&:focus::placeholder {
-		color: transparent; /* 투명하게 설정하여 placeholder를 감춥니다. */
+		color: transparent; 
 	}
 `;
 

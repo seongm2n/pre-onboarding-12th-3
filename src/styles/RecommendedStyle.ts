@@ -24,7 +24,7 @@ export const StyledRecommendedSearch = styled.div`
 		}
 
 		&.selected {
-			background-color: lightblue; // 선택한 항목의 배경색을 원하는 색상으로 변경하세요.
+			background-color: lightblue; 
 		}
 	}
 
