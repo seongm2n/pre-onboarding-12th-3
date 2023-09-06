@@ -47,6 +47,7 @@ const RecommendedSearch: React.FC<RecommendationsProps> = ({
 			);
 		}
 	}, [downArrowPressed, recommendations.length]);
+	
 	return (
 		<StyledRecommendedSearch>
 			<span>추천검색어</span>

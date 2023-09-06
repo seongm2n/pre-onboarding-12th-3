@@ -34,7 +34,6 @@ function SearchSick() {
 		if (debouncedQuery) {
 			try {
 				const result = await searchSickList.getSickList(debouncedQuery);
-				console.log('디바운스', debouncedQuery);
 				setSickList(result);
 			} catch (error) {
 				console.error('API 호출 오류:', error);
