@@ -29,6 +29,10 @@ function SearchSick() {
 	const [isSearchOpen, setIsSearchOpen] = useState(false);
 	const searchRef = useRef(null);
 
+	const searchContainerRef = useRef(null);
+	const [isSearchContainerFocused, setIsSearchContainerFocused] =
+		useState(false);
+
 	const filteredSickList = debouncedQuery
 		? sickList
 			? {
@@ -92,7 +96,14 @@ function SearchSick() {
 
 	return (
 		<div ref={searchRef}>
-			<SearchContainer>
+			<SearchContainer
+				ref={searchContainerRef}
+				onFocus={() => setIsSearchContainerFocused(true)} // 포커스되었을 때 상태 변경
+				onBlur={() => setIsSearchContainerFocused(false)} // 포커스가 해제되었을 때 상태 변경
+				style={{
+					border: isSearchContainerFocused ? 'solid 2px #007be9' : '',
+				}}
+			>
 				<SearchBar
 					query={query}
 					setQuery={setQuery}

@@ -54,8 +54,8 @@ table {
 a{
   text-decoration: none
 }
-button, input {
-  outline: 0;
+button {
+  outline: none;
   border:0;
   cursor: pointer;
 }

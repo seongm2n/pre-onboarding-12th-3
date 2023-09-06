@@ -18,3 +18,4 @@ export const StyledBiSearch = styled(BiSearch)`
 	width: 21px;
 	color: white;
 `;
+
