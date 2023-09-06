@@ -18,27 +18,16 @@ import RecommendedSearch from './RecommendedSearch';
 import styled from 'styled-components';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import { BiSearch } from 'react-icons/bi';
+
 const httpClient = new HttpClient();
 
 function SearchSick() {
 	const { query, setQuery, debouncedQuery } = useDebouncedSearch();
-	const [isOpen, setIsOpen] = useState(false);
 	const [sickList, setSickList] = useState<GetSickListResponseType | null>(
 		null
 	);
-
-	const searchRef = useRef(null);
 	const [isSearchOpen, setIsSearchOpen] = useState(false);
-
-	const closeSearch = () => {
-		setIsSearchOpen(false);
-	};
-
-	useOutsideClick({
-		ref: searchRef,
-		handler: closeSearch,
-	});
+	const searchRef = useRef(null);
 
 	const filteredSickList = debouncedQuery
 		? sickList
@@ -67,9 +56,19 @@ function SearchSick() {
 	}, [handleSearch]);
 
 	const handleClick = () => {
-		setIsOpen(true);
+		setIsSearchOpen(true);
 		handleSearch();
 	};
+
+	const closeSearch = () => {
+		setIsSearchOpen(false);
+		setQuery('');
+	};
+
+	useOutsideClick({
+		ref: searchRef,
+		handler: closeSearch,
+	});
 
 	const handleChange = (e: { target: { value: SetStateAction<string> } }) => {
 		const newQuery = e.target.value;
