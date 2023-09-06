@@ -1,9 +1,5 @@
 import React, { SetStateAction, useCallback } from 'react';
-import {
-	StyledInput,
-	SearchInputBiSearch,
-	SearchInputContainer,
-} from '../../styles/SearchInput';
+import { StyledInput, SearchInputContainer } from '../../styles/SearchInput';
 
 interface SearchBarProps {
 	query: string;
@@ -23,7 +19,6 @@ const SearchBar: React.FC<SearchBarProps> = React.memo(
 
 		return (
 			<SearchInputContainer>
-				<SearchInputBiSearch />
 				<StyledInput
 					type='text'
 					placeholder='질환명을 입력해주세요'

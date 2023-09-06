@@ -19,11 +19,22 @@ function SearchSick() {
 		null
 	);
 
+	const filteredSickList = debouncedQuery
+		? sickList
+			? {
+					response: sickList.response.filter((sick) =>
+						sick.sickNm.toLowerCase().includes(debouncedQuery.toLowerCase())
+					),
+			  }
+			: null
+		: null;
+
 	const handleSearch = useCallback(async () => {
 		const searchSickList = new SearchSickList(httpClient);
 		if (debouncedQuery) {
 			try {
 				const result = await searchSickList.getSickList(debouncedQuery);
+				console.log('디바운스', debouncedQuery);
 				setSickList(result);
 			} catch (error) {
 				console.error('API 호출 오류:', error);
@@ -46,12 +57,12 @@ function SearchSick() {
 	};
 
 	const highlightText = (text: string) => {
-		const parts = text.split(new RegExp(`(${query})`, 'giu'));
+		const parts = text.split(new RegExp(`(${debouncedQuery})`, 'giu'));
 		return (
 			<>
 				{parts.map((part, index) =>
 					part.toLowerCase() === query.toLowerCase() ? (
-						<strong key={index}>{part}</strong>
+						<mark key={index}>{part}</mark>
 					) : (
 						part
 					)
@@ -59,16 +70,6 @@ function SearchSick() {
 			</>
 		);
 	};
-
-	const filteredSickList = debouncedQuery
-		? sickList
-			? {
-					response: sickList.response.filter((sick) =>
-						sick.sickNm.toLowerCase().includes(debouncedQuery.toLowerCase())
-					),
-			  }
-			: null
-		: null;
 
 	return (
 		<div>
@@ -82,7 +83,7 @@ function SearchSick() {
 				<Button onClick={handleClick} />
 			</SearchContainer>
 			{isOpen ? (
-				<div style={{ border: 'solid black', width: 'auto' }}>
+				<div style={{ backgroundColor: 'white' }}>
 					<RecommendedSearch
 						recommendations={
 							filteredSickList
