@@ -55,4 +55,10 @@ table {
 a{
   text-decoration: none
 }
+button, input {
+  outline: 0;
+  border:0;
+  cursor: pointer;
+}
+
 `;
