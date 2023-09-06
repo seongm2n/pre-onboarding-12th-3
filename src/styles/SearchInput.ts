@@ -43,8 +43,4 @@ export const StyledInput = styled.input`
 	}
 `;
 
-export const RecommendedContainer = styled.div`
-	background-color: white;
-	border-radius: 20px;
-	margin-top: 8px;
-`;
+

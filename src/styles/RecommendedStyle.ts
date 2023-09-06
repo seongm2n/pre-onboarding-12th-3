@@ -11,6 +11,9 @@ export const StyledRecommendedSearch = styled.div`
 	ul {
 		list-style-type: none;
 		padding: 0;
+		min-height: 200px;
+		max-height: 400px;
+		overflow-y: auto;
 	}
 
 	li {
@@ -19,12 +22,9 @@ export const StyledRecommendedSearch = styled.div`
 		cursor: pointer;
 		transition: background-color 0.2s;
 
-		&:hover {
-			background-color: gray;
-		}
-
 		&.selected {
-			background-color: lightblue; 
+			background-color: pink;
+			border-radius: 5px;
 		}
 	}
 
@@ -32,4 +32,12 @@ export const StyledRecommendedSearch = styled.div`
 		font-size: 20px;
 		color: rgb(220, 220, 220);
 	}
+`;
+
+export const RecommendedContainer = styled.div`
+	border-radius: 15px;
+	background-color: white;
+	margin-top: 7px;
+	min-height: 300px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
