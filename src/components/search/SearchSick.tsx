@@ -13,9 +13,9 @@ import { HttpClient } from '../../lib/api/HttpClient';
 import { useDebouncedSearch } from '../../context/DebouncedSearchContext';
 import SearchBar from './SearchBar';
 import { SearchContainer } from '../../styles/SearchBar';
+import { RecommendedContainer } from '../../styles/RecommendedStyle';
 import Button from '../commons/Button';
 import RecommendedSearch from './RecommendedSearch';
-import styled from 'styled-components';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
@@ -55,11 +55,6 @@ function SearchSick() {
 		handleSearch();
 	}, [handleSearch]);
 
-	const handleClick = () => {
-		setIsSearchOpen(true);
-		handleSearch();
-	};
-
 	const closeSearch = () => {
 		setIsSearchOpen(false);
 		setQuery('');
@@ -96,7 +91,7 @@ function SearchSick() {
 	};
 
 	return (
-		<div>
+		<div ref={searchRef}>
 			<SearchContainer>
 				<SearchBar
 					query={query}
@@ -111,7 +106,7 @@ function SearchSick() {
 					<AiFillCloseCircle style={{ height: '21px', width: '21px' }} />
 				</button>
 
-				<Button onClick={handleClick} />
+				<Button />
 			</SearchContainer>
 			{isSearchOpen && (
 				<RecommendedContainer>
@@ -130,13 +125,3 @@ function SearchSick() {
 }
 
 export default SearchSick;
-
-const RecommendedContainer = styled.div`
-	border-radius: 20px;
-	background-color: white;
-	margin-top: 7px;
-	min-height: 40vh;
-	max-height: 50vh;
-	overflow: hidden;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
