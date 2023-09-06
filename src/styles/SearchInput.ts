@@ -13,6 +13,10 @@ export const SearchContainer = styled.div`
 	width: 490px;
 	flex-direction: row;
 	justify-content: space-between;
+	border: 1px solid #ccc;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	padding: 10px;
+	outline: none;
 `;
 
 export const SearchInputContainer = styled.div`
@@ -20,16 +24,6 @@ export const SearchInputContainer = styled.div`
 	display: flex;
 	position: relative;
 	gap: 0.75rem;
-`;
-
-export const SearchInputBiSearch = styled(BiSearch)`
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	height: 16px;
-	padding: 4px 0px 0px;
-	position: relative;
-	width: 16px;
 `;
 
 export const StyledInput = styled.input`
@@ -43,4 +37,12 @@ export const StyledInput = styled.input`
 	position: relative;
 	white-space: nowrap;
 	width: fit-content;
+	width: 380px;
+	padding-left: 15px;
+`;
+
+export const RecommendedContainer = styled.div`
+	background-color: white;
+	border-radius: 20px;
+	margin-top: 8px;
 `;
