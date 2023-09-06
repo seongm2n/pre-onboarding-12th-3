@@ -27,10 +27,6 @@ export class HttpClient implements HttpClientInterface {
 				},
 			});
 
-			// 네트워크 요청 및 응답 로깅
-			console.log('HTTP Request:', response.config);
-			console.log('HTTP Response:', response.data);
-
 			return response;
 		} catch (error) {
 			if (axios.isAxiosError(error)) {
