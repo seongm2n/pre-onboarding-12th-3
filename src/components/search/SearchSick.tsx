@@ -12,7 +12,7 @@ import {
 import { HttpClient } from '../../lib/api/HttpClient';
 import { useDebouncedSearch } from '../../context/DebouncedSearchContext';
 import SearchBar from './SearchBar';
-import { SearchContainer } from '../../styles/SearchInput';
+import { SearchContainer } from '../../styles/SearchBar';
 import Button from '../commons/Button';
 import RecommendedSearch from './RecommendedSearch';
 import styled from 'styled-components';
