@@ -5,7 +5,6 @@ import './index.css';
 import App from './App';
 import Main from './pages/Main';
 import NotFound from './pages/NotFound';
-import SearchInfo from './pages/SearchInfo';
 import { GlobalStyle } from './styles/GlobalStyle';
 
 const router = createBrowserRouter([
@@ -13,10 +12,7 @@ const router = createBrowserRouter([
 		path: '/',
 		element: <App />,
 		errorElement: <NotFound />,
-		children: [
-			{ index: true, path: '/', element: <Main /> },
-			{ path: '/:keyword', element: <SearchInfo /> },
-		],
+		children: [{ index: true, path: '/', element: <Main /> }],
 	},
 ]);
 
