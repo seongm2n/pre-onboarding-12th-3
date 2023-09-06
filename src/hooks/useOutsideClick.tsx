@@ -1,4 +1,4 @@
-import { useEffect, useCallback, RefObject, useRef } from 'react';
+import { useEffect, useCallback, RefObject } from 'react';
 
 type OutsideClickHandler = (event: MouseEvent) => void;
 
@@ -11,7 +11,7 @@ export function useOutsideClick({ ref, handler }: UseOutsideClickProps) {
 	const handleClick = useCallback(
 		(e: MouseEvent) => {
 			if (ref.current && !ref.current.contains(e.target as Node)) {
-				return handler;
+				handler(e);
 			}
 		},
 		[ref, handler]
