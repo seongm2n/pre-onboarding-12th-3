@@ -25,7 +25,6 @@ export const TextContainer = styled.div`
 	width: 1040px;
 
 	p {
-		color: #000000;
 		font-family: 'Apple SD Gothic Neo-Bold', Helvetica;
 		font-size: 34px;
 		font-weight: 700;
