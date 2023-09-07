@@ -41,7 +41,7 @@ function SearchSick() {
 							debouncedQuery.toLowerCase() ===
 							sickNm.slice(0, debouncedQuery.length).toLowerCase()
 					),
-			  }
+			}
 			: null
 		: null;
 
@@ -57,18 +57,14 @@ function SearchSick() {
 		}
 	}, [debouncedQuery]);
 
-	useEffect(() => {
-		handleSearch();
-	}, [handleSearch]);
-
 	const closeSearch = () => {
 		setIsSearchOpen(false);
 	};
 
-	useOutsideClick({
-		ref: searchRef,
-		handler: closeSearch,
-	});
+	const cancelSearch = () => {
+		setIsSearchOpen(false);
+		setQuery('');
+	};
 
 	const handleChange = (e: { target: { value: SetStateAction<string> } }) => {
 		const newQuery = e.target.value;
@@ -94,6 +90,15 @@ function SearchSick() {
 			</>
 		);
 	};
+
+	useEffect(() => {
+		handleSearch();
+	}, [handleSearch]);
+
+	useOutsideClick({
+		ref: searchRef,
+		handler: closeSearch,
+	});
 
 	return (
 		<div ref={searchRef}>
@@ -122,7 +127,7 @@ function SearchSick() {
 					/>
 				</SearchInputContainer>
 
-				<CloseButton onClick={closeSearch}>
+				<CloseButton onClick={cancelSearch}>
 					<StyledAiFillCloseCircle />
 				</CloseButton>
 

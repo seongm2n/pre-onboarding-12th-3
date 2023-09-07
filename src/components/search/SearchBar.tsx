@@ -1,5 +1,5 @@
 import React, { SetStateAction, useCallback } from 'react';
-import { StyledInput, SearchInputContainer } from '../../styles/SearchBar';
+import { StyledInput } from '../../styles/SearchBar';
 
 interface SearchBarProps {
 	query: string;
