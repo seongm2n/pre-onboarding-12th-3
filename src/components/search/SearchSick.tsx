@@ -58,7 +58,6 @@ const SearchSick = ({ useCache }: SearchSickProps) => {
 			try {
 				let result = useCache ? localCache.readFromCache(debouncedQuery) : null;
 				if (!result || !result.length) {
-					console.info('calling api-cache');
 					result = await searchSickList.getSickList(debouncedQuery, useCache);
 					// 결과를 캐시에 저장
 					localCache.writeToCache(debouncedQuery, result.response);

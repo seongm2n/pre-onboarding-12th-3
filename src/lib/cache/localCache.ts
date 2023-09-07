@@ -33,4 +33,4 @@ const localCache = (() => {
 
 export default localCache;
 
-const EXPIRE_TIME = 60 * 1000; // 5분
+const EXPIRE_TIME = 5 * 60 * 1000; // 5분

@@ -7,24 +7,20 @@ export interface GetSickListResponseType {
 }
 
 export class SearchSickList {
-	private callingCnt: number;
 	private readonly httpClient: HttpClient;
 
 	constructor(httpClient: HttpClient) {
 		this.httpClient = httpClient;
-		this.callingCnt = 0;
 	}
 
 	async getSickList(
 		query: string,
 		cacheResponse: boolean
 	): Promise<GetSickListResponseType> {
-		this.callingCnt++;
 		try {
 			if (cacheResponse) {
 				// 캐시 사용 시 로컬 캐시에서 데이터를 읽어옴
 				const cachedData = localCache.readFromCache(query);
-				console.log(cachedData);
 				if (cachedData) {
 					return { response: cachedData };
 				}
@@ -39,6 +35,8 @@ export class SearchSickList {
 			return { response: responseData };
 		} catch (error) {
 			throw error;
+		} finally {
+			console.info('calling api');
 		}
 	}
 }
