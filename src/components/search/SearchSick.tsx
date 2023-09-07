@@ -20,6 +20,7 @@ import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { CloseButton, StyledAiFillCloseCircle } from '../../styles/Button';
 
 const httpClient = new HttpClient();
+const RECOMMENDATION_NUMBER = 10;
 
 function SearchSick() {
 	const { query, setQuery, debouncedQuery } = useDebouncedSearch();
@@ -41,7 +42,7 @@ function SearchSick() {
 							debouncedQuery.toLowerCase() ===
 							sickNm.slice(0, debouncedQuery.length).toLowerCase()
 					),
-			}
+			  }
 			: null
 		: null;
 
@@ -139,7 +140,9 @@ function SearchSick() {
 					<RecommendedSearch
 						recommendations={
 							filteredSickList
-								? filteredSickList.response.map((sick) => sick.sickNm)
+								? filteredSickList.response
+										.map((sick) => sick.sickNm)
+										.slice(0, RECOMMENDATION_NUMBER)
 								: []
 						}
 						highlightText={highlightText}
