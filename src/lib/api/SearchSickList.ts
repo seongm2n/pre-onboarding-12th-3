@@ -23,7 +23,7 @@ export class SearchSickList {
 		} catch (error) {
 			throw error;
 		} finally {
-			console.info('calling api');
+			console.info('calling api', this.callingCnt);
 		}
 	}
 }
