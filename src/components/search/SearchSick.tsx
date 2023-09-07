@@ -36,8 +36,10 @@ function SearchSick() {
 	const filteredSickList = debouncedQuery
 		? sickList
 			? {
-					response: sickList.response.filter((sick) =>
-						sick.sickNm.toLowerCase().includes(debouncedQuery.toLowerCase())
+					response: sickList.response.filter(
+						({ sickNm }) =>
+							debouncedQuery.toLowerCase() ===
+							sickNm.slice(0, debouncedQuery.length).toLowerCase()
 					),
 			  }
 			: null
@@ -61,7 +63,6 @@ function SearchSick() {
 
 	const closeSearch = () => {
 		setIsSearchOpen(false);
-		setQuery('');
 	};
 
 	useOutsideClick({
