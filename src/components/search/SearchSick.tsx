@@ -18,11 +18,17 @@ import SearchButton from '../commons/SearchButton';
 import RecommendedSearch from './RecommendedSearch';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { CloseButton, StyledAiFillCloseCircle } from '../../styles/Button';
+import { KeywordQueryData, SickData } from 'sickType';
+import localCache from '../../lib/cache/localCache';
+
+interface SearchSickProps extends KeywordQueryData {
+	useCache: boolean;
+}
 
 const httpClient = new HttpClient();
 const RECOMMENDATION_NUMBER = 10;
 
-function SearchSick() {
+const SearchSick = ({ useCache }: SearchSickProps) => {
 	const { query, setQuery, debouncedQuery } = useDebouncedSearch();
 	const [sickList, setSickList] = useState<GetSickListResponseType | null>(
 		null
@@ -48,16 +54,21 @@ function SearchSick() {
 
 	const handleSearch = useCallback(async () => {
 		const searchSickList = new SearchSickList(httpClient);
-		if (debouncedQuery) {
+		if (debouncedQuery && debouncedQuery.length) {
 			try {
-				const result = await searchSickList.getSickList(debouncedQuery);
+				let result = useCache ? localCache.readFromCache(debouncedQuery) : null;
+				if (!result || !result.length) {
+					console.info('calling api-cache');
+					result = await searchSickList.getSickList(debouncedQuery, useCache);
+					// 결과를 캐시에 저장
+					localCache.writeToCache(debouncedQuery, result.response);
+				}
 				setSickList(result);
 			} catch (error) {
 				console.error('API 호출 오류:', error);
 			}
 		}
-	}, [debouncedQuery]);
-
+	}, [debouncedQuery, useCache]);
 	const closeSearch = () => {
 		setIsSearchOpen(false);
 	};
@@ -100,6 +111,18 @@ function SearchSick() {
 		ref: searchRef,
 		handler: closeSearch,
 	});
+
+	// 'recommendations' 값을 가져오는 함수
+	const getRecommendations = () => {
+		return (
+			localCache.readFromCache('recommendations') ||
+			filteredSickList?.response?.map((sick) => ({
+				sickCd: sick.sickCd,
+				sickNm: sick.sickNm,
+			})) ||
+			[]
+		);
+	};
 
 	return (
 		<div ref={searchRef}>
@@ -151,6 +174,6 @@ function SearchSick() {
 			)}
 		</div>
 	);
-}
+};
 
 export default SearchSick;

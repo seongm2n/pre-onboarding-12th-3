@@ -5,4 +5,9 @@ declare module 'sickType' {
 	};
 
 	type SickListData = SickData[];
+
+	type KeywordQueryData = {
+		query: string;
+		useCache?: boolean;
+	};
 }
