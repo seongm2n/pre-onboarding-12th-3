@@ -11,7 +11,7 @@ export class HttpClient implements HttpClientInterface {
 	#baseURL: string;
 
 	constructor() {
-		this.#baseURL = `http://localhost:4000/`;
+		this.#baseURL = `https://sickapi-json-server.vercel.app/`;
 	}
 
 	async getData(
