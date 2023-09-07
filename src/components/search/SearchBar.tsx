@@ -18,7 +18,7 @@ const SearchBar: React.FC<SearchBarProps> = React.memo(
 		);
 
 		return (
-			<SearchInputContainer>
+			<>
 				<StyledInput
 					type='text'
 					placeholder='질환명을 입력해주세요'
@@ -26,7 +26,7 @@ const SearchBar: React.FC<SearchBarProps> = React.memo(
 					onChange={memoizedHandleChange}
 					onClick={onClick}
 				/>
-			</SearchInputContainer>
+			</>
 		);
 	}
 );

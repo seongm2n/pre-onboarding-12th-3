@@ -35,9 +35,11 @@ export const StyledRecommendedSearch = styled.div`
 `;
 
 export const RecommendedContainer = styled.div`
-	border-radius: 15px;
+	border-radius: 20px;
 	background-color: white;
 	margin-top: 7px;
-	min-height: 300px;
+	min-height: 40vh;
+	max-height: 50vh;
+	overflow: hidden;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;

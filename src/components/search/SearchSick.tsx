@@ -12,12 +12,12 @@ import {
 import { HttpClient } from '../../lib/api/HttpClient';
 import { useDebouncedSearch } from '../../context/DebouncedSearchContext';
 import SearchBar from './SearchBar';
-import { SearchContainer } from '../../styles/SearchBar';
+import { SearchInputContainer } from '../../styles/SearchBar';
 import { RecommendedContainer } from '../../styles/RecommendedStyle';
-import Button from '../commons/Button';
+import SearchButton from '../commons/SearchButton';
 import RecommendedSearch from './RecommendedSearch';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
-import { AiFillCloseCircle } from 'react-icons/ai';
+import { CloseButton, StyledAiFillCloseCircle } from '../../styles/Button';
 
 const httpClient = new HttpClient();
 
@@ -96,29 +96,38 @@ function SearchSick() {
 
 	return (
 		<div ref={searchRef}>
-			<SearchContainer
-				ref={searchContainerRef}
-				onFocus={() => setIsSearchContainerFocused(true)} // 포커스되었을 때 상태 변경
-				onBlur={() => setIsSearchContainerFocused(false)} // 포커스가 해제되었을 때 상태 변경
+			<div
 				style={{
-					border: isSearchContainerFocused ? 'solid 2px #007be9' : '',
+					display: 'flex',
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+					position: 'relative',
 				}}
 			>
-				<SearchBar
-					query={query}
-					setQuery={setQuery}
-					onClick={() => setIsSearchOpen(true)}
-					handleChange={handleChange}
-				/>
-				<button
-					onClick={closeSearch}
-					style={{ outline: '0' }}
+				<SearchInputContainer
+					ref={searchContainerRef}
+					onFocus={() => setIsSearchContainerFocused(true)}
+					onBlur={() => setIsSearchContainerFocused(false)}
+					style={{
+						border: isSearchContainerFocused ? 'solid 2px #007be9' : '',
+					}}
 				>
-					<AiFillCloseCircle style={{ height: '21px', width: '21px' }} />
-				</button>
+					<SearchBar
+						query={query}
+						setQuery={setQuery}
+						onClick={() => setIsSearchOpen(true)}
+						handleChange={handleChange}
+					/>
+				</SearchInputContainer>
 
-				<Button />
-			</SearchContainer>
+				<CloseButton onClick={closeSearch}>
+					<StyledAiFillCloseCircle />
+				</CloseButton>
+
+				<SearchButton />
+			</div>
+
 			{isSearchOpen && (
 				<RecommendedContainer>
 					<RecommendedSearch

@@ -1,22 +1,14 @@
 import styled from 'styled-components';
 
-export const SearchContainer = styled.div`
-	align-items: center;
+export const SearchInputContainer = styled.div`
 	background-color: #ffffff;
 	border: solid 1px whitesmoke;
 	border-radius: 42px;
 	display: flex;
 	padding: 10px 8px 10px 8px;
 	width: 490px;
-	flex-direction: row;
-	justify-content: space-between;
-`;
 
-export const SearchInputContainer = styled.div`
-	align-items: center;
-	display: flex;
-	position: relative;
-	gap: 0.75rem;
+	cursor: pointer;
 `;
 
 export const StyledInput = styled.input`
@@ -36,6 +28,7 @@ export const StyledInput = styled.input`
 	width: 375px;
 	height: 40px;
 	padding-left: 15px;
+	cursor: pointer;
 	&:focus::placeholder {
 		color: transparent;
 	}
