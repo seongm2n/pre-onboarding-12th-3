@@ -25,6 +25,7 @@ export const StyledRecommendedSearch = styled.div`
 		&.selected {
 			background-color: pink;
 			border-radius: 5px;
+			color: white;
 		}
 	}
 
