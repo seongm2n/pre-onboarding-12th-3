@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
+const SICK_URL = process.env.REACT_APP_BASE_URL;
 interface HttpClientInterface {
 	getData(
 		endpoint: string,
@@ -9,9 +10,8 @@ interface HttpClientInterface {
 
 export class HttpClient implements HttpClientInterface {
 	#baseURL: string;
-
 	constructor() {
-		this.#baseURL = `https://sickapi-json-server.vercel.app/`;
+		this.#baseURL = `${SICK_URL}`;
 	}
 
 	async getData(
