@@ -47,21 +47,6 @@ const RecommendedSearch: React.FC<RecommendationsProps> = ({
 		}
 	}, [downArrowPressed, recommendations.length]);
 
-	// 스크롤을 조정하는 함수
-	const scrollToItem = (index: number) => {
-		if (listRef.current) {
-			const listItem = listRef.current.children[index];
-			if (listItem) {
-				listItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-			}
-		}
-	};
-
-	useEffect(() => {
-		// selectedItem이 변경될 때 스크롤을 조정
-		scrollToItem(selectedItem);
-	}, [selectedItem]);
-
 	return (
 		<StyledRecommendedSearch>
 			<span>추천검색어</span>
