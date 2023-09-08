@@ -1,6 +1,7 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react';
 import useKeyPress from '../../hooks/useKeyPress';
 import { StyledRecommendedSearch } from '../../styles/RecommendedStyle';
+import { BiSearch } from 'react-icons/bi';
 
 interface RecommendationsProps {
 	recommendations: string[];
@@ -49,7 +50,6 @@ const RecommendedSearch: React.FC<RecommendationsProps> = ({
 		}
 	}, [downArrowPressed, recommendations.length]);
 
-
 	//새로운 검색 시작 시 selectedItem 초기화
 	useEffect(() => {
 		if (debouncedQuery !== '') {
@@ -69,6 +69,13 @@ const RecommendedSearch: React.FC<RecommendationsProps> = ({
 							className={selectedItem === index ? 'selected' : ''}
 							onClick={() => handleSelectItem(index)}
 						>
+							<BiSearch
+								style={{
+									marginRight: '2px',
+									textAlign: 'center',
+									color: 'gray',
+								}}
+							/>
 							{highlightText(recommendation)}
 						</li>
 					))}
