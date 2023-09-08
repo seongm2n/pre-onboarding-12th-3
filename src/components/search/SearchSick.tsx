@@ -111,18 +111,6 @@ const SearchSick = ({ useCache }: SearchSickProps) => {
 		handler: closeSearch,
 	});
 
-	// 'recommendations' 값을 가져오는 함수
-	const getRecommendations = () => {
-		return (
-			localCache.readFromCache('recommendations') ||
-			filteredSickList?.response?.map((sick) => ({
-				sickCd: sick.sickCd,
-				sickNm: sick.sickNm,
-			})) ||
-			[]
-		);
-	};
-
 	return (
 		<div ref={searchRef}>
 			<div
@@ -168,6 +156,7 @@ const SearchSick = ({ useCache }: SearchSickProps) => {
 								: []
 						}
 						highlightText={highlightText}
+						debouncedQuery={''}
 					/>
 				</RecommendedContainer>
 			)}
