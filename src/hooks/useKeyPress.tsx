@@ -7,14 +7,14 @@ function useKeyPress<T extends string>(targetKey: T) {
 	// 키가 눌렸을 때 실행되는 이벤트 핸들러 함수
 	function downHandler({ key }: KeyboardEvent) {
 		if (targetKey.includes(key)) {
-			setKeyPressed(true);
+			setKeyPressed(false);
 		}
 	}
 
 	// 키가 떼졌을 때 실행되는 이벤트 핸들러 함수
 	const upHandler = ({ key }: KeyboardEvent) => {
 		if (targetKey.includes(key)) {
-			setKeyPressed(false);
+			setKeyPressed(true);
 		}
 	};
 
@@ -29,6 +29,13 @@ function useKeyPress<T extends string>(targetKey: T) {
 			window.removeEventListener('keyup', upHandler);
 		};
 	}, []);
+
+	// debouncedQuery가 변경될 때 keyPressed 상태 초기화
+	useEffect(() => {
+		if (keyPressed) {
+			setKeyPressed(false);
+		}
+	}, [targetKey]);
 
 	return keyPressed;
 }

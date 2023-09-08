@@ -5,14 +5,16 @@ import { StyledRecommendedSearch } from '../../styles/RecommendedStyle';
 interface RecommendationsProps {
 	recommendations: string[];
 	highlightText: (text: string) => React.ReactNode;
+	debouncedQuery: string;
 }
 
 const RecommendedSearch: React.FC<RecommendationsProps> = ({
 	recommendations,
 	highlightText,
+	debouncedQuery,
 }) => {
 	// 현재 선택된 자동완성 인덱스
-	const [selectedItem, setSelectedItem] = useState<number>(-1);
+	const [selectedItem, setSelectedItem] = useState<number>(0);
 	// 자동완성목록 컨테이너 요소
 	const listRef = useRef<HTMLUListElement>(null);
 	const upArrowPressed = useKeyPress('ArrowUp');
@@ -46,6 +48,14 @@ const RecommendedSearch: React.FC<RecommendationsProps> = ({
 			);
 		}
 	}, [downArrowPressed, recommendations.length]);
+
+
+	//새로운 검색 시작 시 selectedItem 초기화
+	useEffect(() => {
+		if (debouncedQuery !== '') {
+			setSelectedItem(-1);
+		}
+	}, [debouncedQuery]);
 
 	return (
 		<StyledRecommendedSearch>
