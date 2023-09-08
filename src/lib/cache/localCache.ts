@@ -1,28 +1,42 @@
 import { SickData } from 'sickType';
 
+const cacheName = 'suggestion-cache';
+
 const localCache = (() => {
-	const writeToCache = (key: string, data: SickData[]) => {
-		const timestampInMinutes = Math.floor(new Date().getMinutes());
-		const storageValue = {
+	const writeToCache = async (
+		key: string,
+		data: SickData[],
+		EXPIRE_TIME: number = 5 * 60 * 1000
+	) => {
+		const cache = await caches.open(cacheName);
+		const expired = new Date().getTime() + EXPIRE_TIME;
+
+		const request = new Request(key);
+		const responseData = {
 			data,
-			timestamp: timestampInMinutes,
+			expired,
 		};
 
-		localStorage.setItem(key, JSON.stringify(storageValue));
+		const response = new Response(JSON.stringify(responseData));
+
+		cache.put(request, response);
 	};
 
-	const readFromCache = (key: string) => {
-		const storageValueString = localStorage.getItem(key);
-		if (!storageValueString) return [];
+	const readFromCache = async (key: string) => {
+		const cache = await caches.open(cacheName);
+		const response = await cache.match(key);
 
-		const storageValue = JSON.parse(storageValueString);
+		if (!response) return [];
 
-		if (new Date().getMinutes() - storageValue.timestampInMinutes > EXPIRE_TIME) {
-			localStorage.removeItem(key);
+		const responseData = await response.json();
+		const now = new Date().getTime();
+
+		if (now > responseData.expired) {
+			cache.delete(key);
 			return [];
 		}
 
-		return storageValue.recommendations || [];
+		return responseData.data || [];
 	};
 
 	return {
@@ -32,5 +46,3 @@ const localCache = (() => {
 })();
 
 export default localCache;
-
-const EXPIRE_TIME = 5 * 60 * 1000; // 5분

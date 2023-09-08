@@ -20,7 +20,7 @@ export class SearchSickList {
 		try {
 			if (cacheResponse) {
 				// 캐시 사용 시 로컬 캐시에서 데이터를 읽어옴
-				const cachedData = localCache.readFromCache(query);
+				const cachedData = await localCache.readFromCache(query);
 				if (cachedData) {
 					return { response: cachedData };
 				}
@@ -28,6 +28,7 @@ export class SearchSickList {
 
 			// 캐시가 없거나 캐시 사용이 비활성화된 경우 API 호출
 			const response = await this.httpClient.getData(`sick?query=${query}`);
+			console.log('calling api');
 			const responseData: SickListData = response.data;
 
 			// API 응답을 캐시에 저장
@@ -35,8 +36,6 @@ export class SearchSickList {
 			return { response: responseData };
 		} catch (error) {
 			throw error;
-		} finally {
-			console.info('calling api');
-		}
+		} 
 	}
 }
