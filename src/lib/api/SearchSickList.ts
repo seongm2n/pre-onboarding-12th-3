@@ -27,7 +27,7 @@ export class SearchSickList {
 			}
 
 			// 캐시가 없거나 캐시 사용이 비활성화된 경우 API 호출
-			const response = await this.httpClient.getData(`sick?query=${query}`);
+			const response = await this.httpClient.getData(`sick?q=${query}`);
 			console.log('calling api');
 			const responseData: SickListData = response.data;
 
