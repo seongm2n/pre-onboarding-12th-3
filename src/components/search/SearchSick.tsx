@@ -87,7 +87,6 @@ const SearchSick = ({ useCache: initialUseCache }: SearchSickProps) => {
 	};
 
 	const cancelSearch = () => {
-		setIsSearchOpen(false);
 		setQuery('');
 	};
 
