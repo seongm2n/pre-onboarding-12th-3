@@ -1,6 +1,6 @@
 import { SickData } from 'sickType';
 
-const cacheName = 'suggestion-cache';
+const cacheName = 'sick-cache';
 
 const localCache = (() => {
 	const writeToCache = async (
